@@ -6,7 +6,7 @@ open class Contact(
     private var email: String
 ) : BaseContact() {
 
-    fun getName() = name
+    override fun getName() : String = name
     fun getPhoneNumber() = phoneNumber
     fun getEmail() = email
 

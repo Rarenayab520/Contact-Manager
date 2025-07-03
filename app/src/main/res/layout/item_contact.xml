@@ -27,5 +27,22 @@
             android:lineSpacingExtra="4dp"
             android:letterSpacing="0.02"
             android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/contact_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#E90754"
+            android:layout_marginTop="4dp"/>
+
+        <!-- ⭐ Star icon for favorite -->
+        <ImageView
+            android:id="@+id/favorite_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_star"
+            android:contentDescription="Favorite"
+            android:visibility="gone" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
