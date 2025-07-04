@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private var contactList = ArrayList<BaseContact>()
     private lateinit var adapter: ContactAdapter
-    private var isFavoriteSelected = false  // 🔥 Heart toggle state
+    private var isFavoriteSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

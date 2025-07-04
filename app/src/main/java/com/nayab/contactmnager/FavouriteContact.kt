@@ -14,7 +14,6 @@ class FavoriteContact(
         return "Favorite Contact"
     }
 
-    // Optional - already handled by Contact
     override fun getName(): String {
         return super.getName()
     }
