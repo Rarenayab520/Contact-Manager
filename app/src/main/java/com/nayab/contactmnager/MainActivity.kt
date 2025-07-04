@@ -1,8 +1,11 @@
 package com.nayab.contactmnager
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,17 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var nameInput: EditText
-    private lateinit var phoneInput: EditText
-    private lateinit var emailInput: EditText
-    private lateinit var addButton: Button
-    private lateinit var showButton: Button
     private lateinit var contactListView: RecyclerView
-    private lateinit var favoriteToggle: ImageView
-
-    private var contactList = ArrayList<BaseContact>()
+    private lateinit var showButton: Button
+    private lateinit var addBtn: ImageView
     private lateinit var adapter: ContactAdapter
-    private var isFavoriteSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,68 +24,36 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Bind views
-        nameInput = findViewById(R.id.name_input)
-        phoneInput = findViewById(R.id.phone_input)
-        emailInput = findViewById(R.id.email_input)
-        addButton = findViewById(R.id.add_button)
         showButton = findViewById(R.id.show_button)
+        addBtn = findViewById(R.id.addBtn)
         contactListView = findViewById(R.id.contact_list)
-        favoriteToggle = findViewById(R.id.favorite_toggle)
 
         // Setup RecyclerView
-        adapter = ContactAdapter(contactList)
+        adapter = ContactAdapter(ContactData.contactList)
         contactListView.layoutManager = LinearLayoutManager(this)
         contactListView.adapter = adapter
 
-        // Toggle favorite heart icon
-        favoriteToggle.setOnClickListener {
-            isFavoriteSelected = !isFavoriteSelected
-            if (isFavoriteSelected) {
-                favoriteToggle.setImageResource(R.drawable.ic_heart_filled)
-            } else {
-                favoriteToggle.setImageResource(R.drawable.ic_outline_heart)
-            }
-        }
-
-        // Add Contact button
-        addButton.setOnClickListener {
-            val name = nameInput.text.toString().trim()
-            val phone = phoneInput.text.toString().trim()
-            val email = emailInput.text.toString().trim()
-
-            if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val newContact: BaseContact = if (isFavoriteSelected) {
-                FavoriteContact(name, phone, email)
-            } else {
-                Contact(name, phone, email)
-            }
-
-            contactList.add(newContact)
-            adapter.notifyItemInserted(contactList.size - 1)
-
-            Toast.makeText(this, "Contact added", Toast.LENGTH_SHORT).show()
-
-            // Clear inputs
-            nameInput.text.clear()
-            phoneInput.text.clear()
-            emailInput.text.clear()
-            isFavoriteSelected = false
-            favoriteToggle.setImageResource(R.drawable.ic_outline_heart)
-            contactListView.visibility = View.GONE
-        }
-
+        // Show contacts on button click
         showButton.setOnClickListener {
-            if (contactList.isEmpty()) {
+            if (ContactData.contactList.isEmpty()) {
                 Toast.makeText(this, "No contacts to display", Toast.LENGTH_SHORT).show()
             } else {
-                contactListView.visibility = View.VISIBLE  // 👈 Show the list now
+                contactListView.visibility = View.VISIBLE
                 adapter.notifyDataSetChanged()
             }
         }
 
+        // Add new contact from another activity
+        addBtn.setOnClickListener {
+            val intent = Intent(this, AddContactActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    // ✅ Prevent auto-showing contacts after return from AddContactActivity
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
+        contactListView.visibility = View.GONE  // 👈 Hides list until Show button is clicked
     }
 }

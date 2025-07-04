@@ -1,20 +1,12 @@
 package com.nayab.contactmnager
 
 class FavoriteContact(
-    name: String,
-    phoneNumber: String,
-    email: String
-) : Contact(name, phoneNumber, email) {
-
-    override fun displayInfo(): String {
-        return super.displayInfo()
-    }
+    firstName: String,
+    lastName: String,
+    phoneNumber: String
+) : Contact(firstName, lastName, phoneNumber) {
 
     override fun getContactType(): String {
-        return "Favorite Contact"
-    }
-
-    override fun getName(): String {
-        return super.getName()
+        return "Favorite"
     }
 }

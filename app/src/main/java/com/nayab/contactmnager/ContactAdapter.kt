@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 class ContactAdapter(private val contactList: List<BaseContact>) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
-    class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val contactInfo: TextView = itemView.findViewById(R.id.contact_info)
-        val favoriteIcon: ImageView = itemView.findViewById(R.id.favorite_icon)
+    inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val initialCircle: TextView = itemView.findViewById(R.id.initial_circle)
+        val contactName: TextView = itemView.findViewById(R.id.contact_name)
         val contactType: TextView = itemView.findViewById(R.id.contact_type)
+        val favoriteIcon: ImageView = itemView.findViewById(R.id.favorite_icon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -26,20 +27,29 @@ class ContactAdapter(private val contactList: List<BaseContact>) :
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
 
-        // Display contact details
-        holder.contactInfo.text = contact.displayInfo()
-        holder.contactType.text = "Type: ${contact.getContactType()}"
+        // Set full name
+        holder.contactName.text = contact.displayInfo()
 
-        // Show or hide star icon based on type
+        // Set initial in the circle
+        holder.initialCircle.text = contact.getFirstInitial()
+
+        // Show contact type
+        holder.contactType.text = contact.getContactType()
+
+        // Show star for favorite
         if (contact is FavoriteContact) {
             holder.favoriteIcon.visibility = View.VISIBLE
         } else {
             holder.favoriteIcon.visibility = View.GONE
         }
 
-        // Click: show Toast with contact name
+        // On click: show more details
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Clicked: ${contact.getName()}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                holder.itemView.context,
+                "Name: ${contact.getName()}\nPhone: ${contact.getPhoneNumber()}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
