@@ -10,12 +10,10 @@ abstract class BaseContact(
 ) {
     abstract fun getContactType(): String
 
+    // ✅ Removed conflicting getLastName() — use property instead
+
     fun getName(): String {
         return firstName
-    }
-
-    fun getLastName(): String {
-        return lastName
     }
 
     fun getPhoneNumber(): String {

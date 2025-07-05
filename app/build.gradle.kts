@@ -14,8 +14,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-        renderscriptTargetApi =30
-        renderscriptSupportModeEnabled =true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,8 +45,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // BlurView for iOS-like background blur
-    implementation("com.github.Dimezis:BlurView:version-1.6.6")
 
     // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
