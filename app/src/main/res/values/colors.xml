@@ -15,6 +15,5 @@
     <color name="dark_text">#000000</color>
     <color name="light_text">#888888</color>
     <color name="gray_200">#F2F2F2</color>
-
-
+    <color name="Green">#034E06</color>
 </resources>

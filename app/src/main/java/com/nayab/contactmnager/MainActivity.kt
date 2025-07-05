@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         addBtn.setOnClickListener {
             val intent = Intent(this, AddContactActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
         }
     }
 

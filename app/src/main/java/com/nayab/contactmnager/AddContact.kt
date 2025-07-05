@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class AddContactActivity : AppCompatActivity() {
 
@@ -29,6 +30,7 @@ class AddContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_contact)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.darkBackground)
 
         // Bind views
         etFirstName = findViewById(R.id.etFirstName)
