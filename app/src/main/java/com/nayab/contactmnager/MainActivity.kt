@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eightbitlab.blurview.BlurView
+import com.eightbitlab.blurview.RenderScriptBlur
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var showButton: Button
     private lateinit var addBtn: ImageView
     private lateinit var adapter: ContactAdapter
+    private lateinit var blurView: BlurView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +30,25 @@ class MainActivity : AppCompatActivity() {
         showButton = findViewById(R.id.show_button)
         addBtn = findViewById(R.id.addBtn)
         contactListView = findViewById(R.id.contact_list)
+        blurView = findViewById(R.id.blurView)
 
         // Setup RecyclerView
         adapter = ContactAdapter(ContactData.contactList)
         contactListView.layoutManager = LinearLayoutManager(this)
         contactListView.adapter = adapter
+
+        // BlurView Setup
+        val radius = 18f
+        val decorView = window.decorView.rootView as View
+        val windowBackground = window.decorView.background
+
+        blurView.setupWith(decorView.findViewById(android.R.id.content))
+            .setFrameClearDrawable(windowBackground)
+            .setBlurAlgorithm(RenderScriptBlur(this))
+            .setBlurRadius(radius)
+            .setHasFixedTransformationMatrix(true)
+
+        blurView.visibility = View.GONE // Hidden by default
 
         // Show contacts on button click
         showButton.setOnClickListener {
@@ -43,18 +60,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Add new contact from another activity
+        // Add new contact (show bottom sheet + blur)
         addBtn.setOnClickListener {
-            val intent = Intent(this, AddContactActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
+            blurView.visibility = View.VISIBLE
+            val sheet = NewContactFragment {
+                blurView.visibility = View.GONE
+            }
+            sheet.show(supportFragmentManager, "NewContact")
         }
     }
 
-    // ✅ Prevent auto-showing contacts after return from AddContactActivity
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
-        contactListView.visibility = View.GONE  // 👈 Hides list until Show button is clicked
+        contactListView.visibility = View.GONE
     }
 }

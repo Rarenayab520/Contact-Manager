@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class ContactAdapter(private val contactList: List<BaseContact>) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
@@ -16,6 +17,7 @@ class ContactAdapter(private val contactList: List<BaseContact>) :
         val contactName: TextView = itemView.findViewById(R.id.contact_name)
         val contactType: TextView = itemView.findViewById(R.id.contact_type)
         val favoriteIcon: ImageView = itemView.findViewById(R.id.favorite_icon)
+        val profileImage: ImageView = itemView.findViewById(R.id.profile_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -26,24 +28,28 @@ class ContactAdapter(private val contactList: List<BaseContact>) :
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
+        val fullName = contact.displayInfo()
 
-        // Set full name
-        holder.contactName.text = contact.displayInfo()
-
-        // Set initial in the circle
-        holder.initialCircle.text = contact.getFirstInitial()
-
-        // Show contact type
+        holder.contactName.text = fullName
         holder.contactType.text = contact.getContactType()
 
-        // Show star for favorite
-        if (contact is FavoriteContact) {
-            holder.favoriteIcon.visibility = View.VISIBLE
+        if (contact.imageUri != null) {
+            // Show profile image using Glide
+            holder.profileImage.visibility = View.VISIBLE
+            holder.initialCircle.visibility = View.GONE
+            Glide.with(holder.itemView.context)
+                .load(contact.imageUri)
+                .centerCrop()
+                .into(holder.profileImage)
         } else {
-            holder.favoriteIcon.visibility = View.GONE
+            // Show initial circle
+            holder.profileImage.visibility = View.GONE
+            holder.initialCircle.visibility = View.VISIBLE
+            holder.initialCircle.text = contact.getFirstInitial()
         }
 
-        // On click: show more details
+        holder.favoriteIcon.visibility = if (contact is FavoriteContact) View.VISIBLE else View.GONE
+
         holder.itemView.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,

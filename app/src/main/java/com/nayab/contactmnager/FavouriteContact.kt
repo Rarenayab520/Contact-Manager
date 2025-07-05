@@ -1,12 +1,12 @@
 package com.nayab.contactmnager
 
-class FavoriteContact(
-    firstName: String,
-    lastName: String,
-    phoneNumber: String
-) : Contact(firstName, lastName, phoneNumber) {
+import android.net.Uri
 
-    override fun getContactType(): String {
-        return "Favorite"
-    }
+data class FavoriteContact(
+    override val firstName: String,
+    override val lastName: String,
+    override val phone: String,
+    override val imageUri: Uri? = null
+) : BaseContact(firstName, lastName, phone, imageUri) {
+    override fun getContactType(): String = "Favorite"
 }
