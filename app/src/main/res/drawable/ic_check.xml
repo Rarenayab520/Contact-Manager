@@ -1,18 +1,22 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <solid android:color="#C8C8C8"/>
-            <stroke android:width="1dp" android:color="@color/black"/>
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/black" />
         </shape>
     </item>
     <item android:gravity="center">
 
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp" android:height="24dp"
-    android:viewportWidth="24" android:viewportHeight="24">
-    <path
-        android:fillColor="@color/white"
-        android:pathData="M9,16.17l-3.88,-3.88L4.7,13.71 9,18l12,-12 -1.41,-1.41z"/>
-</vector>
+        <vector
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:fillColor="@color/black"
+                android:pathData="M8,19.17l-2.88,-3.88L5.7,13.71 11,19l10,-12 -0.81,-0.41z" />
+        </vector>
     </item>
 </layer-list>

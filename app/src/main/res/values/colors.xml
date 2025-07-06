@@ -11,11 +11,12 @@
     <color name="buttonAdd">#565D62</color>
     <color name="buttonShow">#565D62</color>
     <color name="ios_blue">#007AFF</color>
+    <color name="light_gray_blue">#C54C8AD3</color>
     <color name="light_gray_bg">#F2F2F7</color>
     <color name="dark_text">#000000</color>
     <color name="light_text">#888888</color>
     <color name="gray_200">#F2F2F2</color>
-    <color name="Green">#034E06</color>
+    <color name="Green">#B10EA414</color>
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
     </style>

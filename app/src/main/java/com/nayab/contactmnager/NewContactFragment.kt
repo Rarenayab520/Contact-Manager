@@ -1,6 +1,6 @@
 package com.nayab.contactmnager
 
-import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +25,7 @@ class NewContactFragment(private val onDismissCallback: () -> Unit) : BottomShee
         val firstNameInput = view.findViewById<EditText>(R.id.etFirstName)
         val lastNameInput = view.findViewById<EditText>(R.id.etLastName)
         val phoneInput = view.findViewById<EditText>(R.id.etPhone)
-        val saveButton = view.findViewById<View>(R.id.addBtn)
+        val saveButton = view.findViewById<View>(R.id.btnSave)
 
         saveButton.setOnClickListener {
             val first = firstNameInput.text.toString().trim()
@@ -35,7 +35,11 @@ class NewContactFragment(private val onDismissCallback: () -> Unit) : BottomShee
             if (first.isEmpty() || last.isEmpty() || phone.isEmpty()) {
                 Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
+                // 1) add to in‑memory list
                 ContactData.contactList.add(Contact(first, last, phone))
+                // 2) notify MainActivity (which will save and refresh)
+                onDismissCallback()
+                // 3) then dismiss the sheet
                 dismiss()
             }
         }
@@ -53,7 +57,7 @@ class NewContactFragment(private val onDismissCallback: () -> Unit) : BottomShee
         }
     }
 
-    fun onDismiss(dialog: Dialog) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         onDismissCallback()
     }

@@ -3,10 +3,10 @@ package com.nayab.contactmnager
 import android.net.Uri
 
 abstract class BaseContact(
-    open val firstName: String,
-    open val lastName: String,
-    open val phone: String,
-    open val imageUri: Uri? = null
+    @Transient open val firstName: String,
+    @Transient open val lastName: String,
+    @Transient open val phone: String,
+    @Transient open val imageUri: Uri? = null
 ) {
     abstract fun getContactType(): String
 

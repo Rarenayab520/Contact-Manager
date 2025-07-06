@@ -1,251 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainFrame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#EAEAF0">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
+    <!-- ✅ Top Bar -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:id="@+id/topBar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@android:color/white"
-            android:padding="12dp"
-            android:elevation="4dp"
-            tools:ignore="MissingConstraints">
+        <ImageView
+            android:id="@+id/btnCancel"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_back_arrow" />
 
-            <ImageView
-                android:id="@+id/backBtn"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_back_arrow" />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Contacts"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contacts"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#000"
-                android:layout_centerInParent="true" />
+        <ImageView
+            android:id="@+id/addBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_add" />
+    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/addBtn"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_add"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Add Contact"
-                android:clickable="true"
-                android:focusable="true" />
-        </RelativeLayout>
+    <!-- Search Bar -->
+    <LinearLayout
+        android:id="@+id/searchContainer"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/search_bar_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
 
-        <LinearLayout
-            android:id="@+id/searchContainer"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="#181616" />
+
+        <EditText
+            android:id="@+id/searchBar"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"
-            android:orientation="horizontal"
-            android:background="@drawable/search_bar_bg"
-            android:paddingHorizontal="12dp"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/topBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Search"
+            android:inputType="text"
+            android:paddingHorizontal="8dp"
+            android:textColor="#000"
+            android:textColorHint="#888" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="#181616" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/ic_btn_speak_now"
+            app:tint="@color/light_text" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/searchBar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Search"
-                android:background="@android:color/transparent"
-                android:paddingHorizontal="8dp"
-                android:textColorHint="#888"
-                android:textColor="#000"
-                android:inputType="text" />
+    <!-- My Card Section -->
+    <LinearLayout
+        android:id="@+id/myCardSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchContainer">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@android:drawable/ic_btn_speak_now"
-                app:tint="@color/light_text" />
-        </LinearLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profileImage"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profilepic"
+            app:shapeAppearanceOverlay="@style/CircleImageView" />
 
         <LinearLayout
-            android:id="@+id/myCardSection"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp"
-            android:gravity="center_vertical"
-            android:background="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@id/searchContainer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profileImage"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/profilepic"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/CircleImageView" />
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/myName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="12dp">
+                android:text="Shayan Khan"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/myName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Shayan Khan"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
-
-                <TextView
-                    android:id="@+id/myCardSubtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My Card"
-                    android:textSize="14sp"
-                    android:textColor="#888888"/>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/myCardSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Card"
+                android:textColor="#888"
+                android:textSize="14sp" />
         </LinearLayout>
+    </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/show_button"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:text="Show Contacts"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            app:cornerRadius="20dp"
-            app:backgroundTint="@color/buttonShow"
-            app:layout_constraintTop_toBottomOf="@id/myCardSection"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Contacts List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contact_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="18dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myCardSection" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contact_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:paddingTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/show_button"
-            app:layout_constraintBottom_toTopOf="@id/bottomNav"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:id="@+id/bottomNav"
             android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
             android:background="@drawable/bottom_nav_bg"
             android:gravity="center"
-            android:layout_margin="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:orientation="horizontal">
 
+            <!-- Calls Tab -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_calls"
-                    app:tint="#444" />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Calls"
-                    android:textSize="12sp"
-                    android:textColor="#444" />
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
             </LinearLayout>
 
+            <!-- Contacts Tab -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_contact" />
+                    android:src="@drawable/ic_contact"
+                    app:tint="@color/ios_blue" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contacts"
-                    android:textSize="12sp"
-                    android:textColor="@color/ios_blue" />
+                    android:textColor="@color/ios_blue"
+                    android:textSize="12sp" />
             </LinearLayout>
 
+            <!-- Keypad Tab -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_keypad" />
+                    android:src="@drawable/ic_keypad"
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Keypad"
-                    android:textSize="12sp"
-                    android:textColor="#444" />
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="0.2"
+            android:background="@drawable/bottom_nav_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_search"
+                app:tint="@color/black" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Modal Overlay -->
     <FrameLayout
         android:id="@+id/modalContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#80000000"
         android:visibility="gone"
-        android:background="#80000000" />
-
-</FrameLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
