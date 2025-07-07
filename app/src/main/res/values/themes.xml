@@ -3,7 +3,7 @@
     <style name="Base.Theme.ContactMnager" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">#EAEAF0</item>
+        <item name="android:statusBarColor">@color/white</item>
     </style>
 
     <style name="Theme.ContactMnager" parent="Base.Theme.ContactMnager" />

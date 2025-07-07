@@ -50,7 +50,7 @@ dependencies {
     implementation(libs.glide)
     kapt("com.github.bumptech.glide:compiler:4.16.0")
     implementation(libs.gson)
-
+    implementation ("com.google.code.gson:gson:2.10.1'")
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
